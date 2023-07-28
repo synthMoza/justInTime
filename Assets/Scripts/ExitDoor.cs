@@ -8,15 +8,14 @@ public class ExitDoor : MonoBehaviour
     public UnityEvent onEnterEvent;
     private bool isOpen;
 
-    public void Interact()
+    public void Open()
     {
-        if (!isOpen)
-        {
-            isOpen = true;
-        }
-        else
-        {
+        isOpen = true;
+    }
+
+    public void TryEnter()
+    {
+        if (isOpen)
             onEnterEvent.Invoke();
-        }
     }
 }
