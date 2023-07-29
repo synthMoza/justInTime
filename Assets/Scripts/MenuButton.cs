@@ -7,6 +7,6 @@ public class MenuButton : MonoBehaviour
 {
     public void ChangeSceneToMenu()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
     }
 }

@@ -36,4 +36,19 @@ public class TimeManager : MonoBehaviour
             }
         }
     }
+
+    public bool IsThisTime(float checkTiming)
+    {
+        return (int) currentTime == (int) checkTiming;
+    }
+
+    public void StopTimer()
+    {
+        isClockTicking = false;
+    }
+
+    public void ContinueTimer()
+    {
+        isClockTicking = true;
+    }
 }

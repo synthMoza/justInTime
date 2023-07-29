@@ -18,16 +18,12 @@ public class Interactable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
-        {
             isInRange = true;
-            Debug.Log("Player is in range");
-        }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
             isInRange = false;
-            Debug.Log("Player is out of range");
     }
 }

@@ -24,7 +24,12 @@ public class CodeLock : MonoBehaviour
     {
         if (currentCode == secretCode)
         {
+            Debug.Log("The safe has been opened");
             onRightInput.Invoke();
+        }
+        else
+        {
+            Debug.Log(currentCode.ToString() + " is the wrong code");
         }
 
         ClearCode();
