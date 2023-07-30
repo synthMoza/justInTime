@@ -13,16 +13,21 @@ public enum Direction
 public class PlayerController : MonoBehaviour
 {
     private Vector2 position;
-    private Direction facingDirection;
+    private Direction facingDirection = Direction.Up;
     
     public float moveSpeed;
 
     [SerializeField] private Rigidbody2D rigidBody;
+    [SerializeField] private Animator animator;
 
     void Update()
     {
         position.x = Input.GetAxisRaw("Horizontal");
         position.y = Input.GetAxisRaw("Vertical");
+
+        animator.SetFloat("Horizontal", position.x);
+        animator.SetFloat("Vertical", position.y);
+        animator.SetFloat("Speed", position.sqrMagnitude);
     }
 
     void FixedUpdate()
