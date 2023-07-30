@@ -4865,11 +4865,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8379080903111742576, guid: 68ebaafd697ab8047bac6ca2988254e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 33.00323
+      value: 386
       objectReference: {fileID: 0}
     - target: {fileID: 8379080903111742576, guid: 68ebaafd697ab8047bac6ca2988254e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 43.72748
+      value: 128
       objectReference: {fileID: 0}
     - target: {fileID: 8379080903111742576, guid: 68ebaafd697ab8047bac6ca2988254e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -6767,7 +6767,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 949893479}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: ChangePause
+        m_MethodName: ChangePhysicsPause
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

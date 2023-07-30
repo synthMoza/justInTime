@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class DiaryController : MonoBehaviour
 {
+    private List<string> hints = new List<string>();
+
     [SerializeField]
     private GameObject prefabObj;
     [SerializeField]
@@ -21,6 +23,9 @@ public class DiaryController : MonoBehaviour
 
     public void AddNote(string note)
     {
+        if (hints.Contains(note))
+            return;
+        
         GameObject newObj = Instantiate(prefabObj, parentObj);
         Transform transformObj = newObj.GetComponent<Transform>();
         
@@ -40,7 +45,23 @@ public class DiaryController : MonoBehaviour
             return;
         }
 
+        hints.Add(note);
         textObj.text = noteSuffix + note;
+    }
+
+    void OnEnable()
+    {
+        int count = PlayerPrefs.GetInt("hints_size", 0);
+        for (int i = 0; i < count; ++i)
+            AddNote(PlayerPrefs.GetString("hint_" + i));
+    }
+
+    void OnDisable()
+    {
+        PlayerPrefs.SetInt("hints_size", hints.Count);
+        for (int i = 0; i < hints.Count; ++i)
+            PlayerPrefs.SetString("hint_" + i, hints[i]);
+        PlayerPrefs.Save();
     }
 
     public void ChangeState()
