@@ -5,25 +5,35 @@ using UnityEngine;
 
 public class ExitDoor : MonoBehaviour
 {
+    [SerializeField]
+    private Sprite openDoorSprite;
+
     public UnityEvent onEnterEvent;
-    private bool isOpen;
+
+    private bool isOpen = false;
+    private bool canbeOpened = false;
+
+    public void SetCanBeOpened()
+    {
+        canbeOpened = true;
+    }
 
     public void Open()
     {
         isOpen = true;
+        gameObject.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
         Debug.Log("The door has just been opened!");
     }
 
-    public void TryEnter()
+    public void Interact()
     {
-        if (isOpen)
-        {
-            Debug.Log("You have just entered the door!");
+        if (canbeOpened)
+            Open();
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player") && isOpen)
             onEnterEvent.Invoke();
-        }
-        else
-        {
-            Debug.Log("The door is locked, you can't enter.");
-        }
     }
 }
