@@ -14,11 +14,11 @@ public class PlayerController : MonoBehaviour
 {
     private Vector2 position;
     private Direction facingDirection;
-    private float moveSpeed = 30f;
+    
+    public float moveSpeed;
 
     [SerializeField] private Rigidbody2D rigidBody;
 
-    // Update is called once per frame
     void Update()
     {
         position.x = Input.GetAxisRaw("Horizontal");
@@ -28,6 +28,6 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         if (!PauseManager.isPhysicsPaused)
-            rigidBody.MovePosition(rigidBody.position + position * moveSpeed * Time.fixedDeltaTime);
+            rigidBody.AddForce(position * moveSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);
     }
 }

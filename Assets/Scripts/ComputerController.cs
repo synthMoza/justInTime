@@ -6,7 +6,7 @@ using UnityEngine;
 public class ComputerController : MonoBehaviour
 {
     [SerializeField]
-    private ProgressController progressController;
+    private MapController mapController;
     public UnityEvent onAccesing;
     private bool isTurnedOn = false;
 
@@ -22,7 +22,7 @@ public class ComputerController : MonoBehaviour
         // If the computer is turned off, check the cable
         if (!isTurnedOn)
         {
-            if (playerManager.hasCable && progressController.IsElectricityOn())
+            if (playerManager.hasCable && mapController.IsElectricityOn())
             {
                 Debug.Log("Computer has just been turned on");
                 isTurnedOn = true;   

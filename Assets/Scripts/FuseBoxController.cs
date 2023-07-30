@@ -5,11 +5,11 @@ using UnityEngine;
 public class FuseBoxController : MonoBehaviour
 {
     [SerializeField]
-    private ProgressController progressController;
+    private MapController mapController;
 
     public void Switch()
     {
-        progressController.TurnElectricityState();
-        Debug.Log("Fuse box has been switched to state " + progressController.IsElectricityOn().ToString());
+        mapController.TurnElectricityState();
+        Debug.Log("Fuse box has been switched to state " + mapController.IsElectricityOn().ToString());
     }
 }
