@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class Wardrobe : MonoBehaviour
 {
+    [SerializeField]
+    private Sprite wardrobeOpen;
+
     private bool isOpen;
     private bool isEmpty;
     public UnityEvent onInteraction;
@@ -15,6 +18,7 @@ public class Wardrobe : MonoBehaviour
         {
             Debug.Log("The wardrobe has been opened!");
             isOpen = true;
+            gameObject.GetComponent<SpriteRenderer>().sprite = wardrobeOpen;
         }
         else if (!isEmpty)
         {
