@@ -8,6 +8,7 @@ public class ExitDoor : MonoBehaviour
     [SerializeField]
     private Sprite openDoorSprite;
 
+    public UnityEvent onWrongAccessing;
     public UnityEvent onEnterEvent;
 
     private bool isOpen = false;
@@ -31,6 +32,8 @@ public class ExitDoor : MonoBehaviour
     {
         if (canbeOpened)
             Open();
+        else
+            onWrongAccessing.Invoke();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

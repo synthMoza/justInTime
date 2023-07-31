@@ -21,20 +21,28 @@ public class MapController : MonoBehaviour
     [SerializeField]
     private GameObject rightWindowLight;
 
+    [SerializeField]
+    private ComputerController computer;
+
     public void TurnElectricityState()
     {
         isElectricityOn = !isElectricityOn;
         if (isElectricityOn)
         {
+            // controll shadows
             lowerShadow.SetActive(false);
             upperLeftShadow.SetActive(false);
             upperRightShadow.SetActive(false);
         }
         else
         {
+            // control shadows
             lowerShadow.SetActive(true);
             upperLeftShadow.SetActive(!isLeftCurtainOpen);
             upperRightShadow.SetActive(!isRightCurtainOpen);
+
+            // handle electric stuff
+            computer.TrySetState(false);
         }
     }
 

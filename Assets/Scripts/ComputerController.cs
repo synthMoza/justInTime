@@ -7,9 +7,28 @@ public class ComputerController : MonoBehaviour
 {
     [SerializeField]
     private MapController mapController;
+    [SerializeField]
+    private Sprite computerOff;
+    [SerializeField]
+    private Sprite computerOn;
+
     public UnityEvent onAccesing;
     public UnityEvent onWrongAccesing;
     private bool isTurnedOn = false;
+
+    private void ChangeSprite()
+    {
+        if (isTurnedOn)
+            gameObject.GetComponent<SpriteRenderer>().sprite = computerOn;
+        else
+            gameObject.GetComponent<SpriteRenderer>().sprite = computerOff;
+    }
+
+    public void TrySetState(bool state)
+    {
+        isTurnedOn = state;
+        ChangeSprite();
+    }
 
     public void TryInteract(GameObject obj)
     {
@@ -27,6 +46,7 @@ public class ComputerController : MonoBehaviour
             {
                 Debug.Log("Computer has just been turned on");
                 isTurnedOn = true;
+                ChangeSprite();
             }
             else
             {
