@@ -26,6 +26,10 @@ public class PauseManager : MonoBehaviour
     public void ChangePhysicsPause()
     {
         isPhysicsPaused = !isPhysicsPaused;
+        if (isPhysicsPaused)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;
     }
 
     void Update()

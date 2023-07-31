@@ -56,4 +56,9 @@ public class MapController : MonoBehaviour
         rightWindowLight.SetActive(isRightCurtainOpen);
         upperRightShadow.SetActive(!isRightCurtainOpen && !isElectricityOn);
     }
+
+    public bool IsLightsOff()
+    {
+        return !isRightCurtainOpen && !isLeftCurtainOpen && !isElectricityOn;
+    }
 }

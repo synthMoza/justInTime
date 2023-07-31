@@ -2,18 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Direction
-{
-    Up,
-    Right,
-    Down,
-    Left
-}
-
 public class PlayerController : MonoBehaviour
 {
     private Vector2 position;
-    private Direction facingDirection = Direction.Up;
     
     public float moveSpeed;
 
@@ -25,14 +16,17 @@ public class PlayerController : MonoBehaviour
         position.x = Input.GetAxisRaw("Horizontal");
         position.y = Input.GetAxisRaw("Vertical");
 
-        animator.SetFloat("Horizontal", position.x);
-        animator.SetFloat("Vertical", position.y);
-        animator.SetFloat("Speed", position.sqrMagnitude);
+        if (!PauseManager.isPhysicsPaused)
+        {
+            animator.SetFloat("Horizontal", position.x);
+            animator.SetFloat("Vertical", position.y);
+            animator.SetFloat("Speed", position.sqrMagnitude);
+        }
     }
 
     void FixedUpdate()
     {
         if (!PauseManager.isPhysicsPaused)
-            rigidBody.AddForce(position * moveSpeed * Time.fixedDeltaTime, ForceMode2D.Impulse);
+            rigidBody.AddForce(position * moveSpeed * Time.deltaTime, ForceMode2D.Impulse);
     }
 }

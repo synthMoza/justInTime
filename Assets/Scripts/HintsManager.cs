@@ -17,7 +17,7 @@ public class HintsManager : MonoBehaviour
     IEnumerator ShowHintCoroutine(string hint)
     {
         subtitlesText.text = hint;
-        yield return new WaitForSeconds(subtitlesDuration);
+        yield return new WaitForSecondsRealtime(subtitlesDuration);
         if (subtitlesText.text == hint) // yes, this is a bad idea
             subtitlesText.text = "";
     }

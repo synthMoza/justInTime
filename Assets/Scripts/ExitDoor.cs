@@ -20,9 +20,11 @@ public class ExitDoor : MonoBehaviour
 
     public void Open()
     {
+        Debug.Log("The door has just been opened!");
+        
         isOpen = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
-        Debug.Log("The door has just been opened!");
+        onEnterEvent.Invoke(); // consider is in range
     }
 
     public void Interact()

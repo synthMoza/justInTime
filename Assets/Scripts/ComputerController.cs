@@ -8,6 +8,7 @@ public class ComputerController : MonoBehaviour
     [SerializeField]
     private MapController mapController;
     public UnityEvent onAccesing;
+    public UnityEvent onWrongAccesing;
     private bool isTurnedOn = false;
 
     public void TryInteract(GameObject obj)
@@ -25,11 +26,12 @@ public class ComputerController : MonoBehaviour
             if (playerManager.hasCable && mapController.IsElectricityOn())
             {
                 Debug.Log("Computer has just been turned on");
-                isTurnedOn = true;   
+                isTurnedOn = true;
             }
             else
             {
                 Debug.Log("I can't use it right now");
+                onWrongAccesing.Invoke();
             }
         }
         else // turned on
