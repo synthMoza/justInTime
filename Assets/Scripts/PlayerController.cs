@@ -11,10 +11,30 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rigidBody;
     [SerializeField] private Animator animator;
 
+    [SerializeField] private AudioSource walkingAudioSource;
+    [SerializeField] private AudioClip[] walkingSoundClips;
+    private float walkingSoundTimer;
+    private float walkingSoundDelay = 0.25f;
+
+    void HandleWalkingSounds()
+    {
+        if (position == Vector2.zero)
+            return;
+        
+        walkingSoundTimer -= Time.deltaTime;
+        if (walkingSoundTimer <= 0)
+        {
+            walkingAudioSource.PlayOneShot(walkingSoundClips[Random.Range(0, walkingSoundClips.Length)]);
+            walkingSoundTimer = walkingSoundDelay;
+        }
+    }
+
     void Update()
     {
         position.x = Input.GetAxisRaw("Horizontal");
         position.y = Input.GetAxisRaw("Vertical");
+
+        HandleWalkingSounds();
 
         if (!PauseManager.isPhysicsPaused)
         {

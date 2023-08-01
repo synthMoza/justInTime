@@ -7,6 +7,11 @@ public class ExitDoor : MonoBehaviour
 {
     [SerializeField]
     private Sprite openDoorSprite;
+    
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip openDoorClip;
 
     public UnityEvent onWrongAccessing;
     public UnityEvent onEnterEvent;
@@ -25,6 +30,7 @@ public class ExitDoor : MonoBehaviour
         
         isOpen = true;
         gameObject.GetComponent<SpriteRenderer>().sprite = openDoorSprite;
+        audioSource.PlayOneShot(openDoorClip);
         onEnterEvent.Invoke(); // consider is in range
     }
 

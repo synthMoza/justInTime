@@ -7,7 +7,7 @@ public class Interactable : MonoBehaviour
 {
     public bool isInRange;
     public KeyCode interactKey = KeyCode.E;
-    public UnityEvent interactAction;  
+    public UnityEvent interactAction;
 
     void Update()
     {

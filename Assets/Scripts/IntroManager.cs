@@ -14,7 +14,7 @@ public class IntroManager : MonoBehaviour
 
     IEnumerator MakeIntro()
     {
-        yield return new WaitForSeconds(waitTime);
+        yield return new WaitForSecondsRealtime(waitTime);
         
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); // load game scene
     }

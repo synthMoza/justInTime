@@ -12,6 +12,13 @@ public class ComputerController : MonoBehaviour
     [SerializeField]
     private Sprite computerOn;
 
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip computerTurnOnClip;
+    [SerializeField]
+    private AudioClip computerClickClip;
+
     public UnityEvent onAccesing;
     public UnityEvent onWrongAccesing;
     private bool isTurnedOn = false;
@@ -44,9 +51,10 @@ public class ComputerController : MonoBehaviour
         {
             if (playerManager.hasCable && mapController.IsElectricityOn())
             {
-                Debug.Log("Computer has just been turned on");
                 isTurnedOn = true;
                 ChangeSprite();
+                audioSource.PlayOneShot(computerTurnOnClip);
+                Debug.Log("Computer has just been turned on");
             }
             else
             {
@@ -57,6 +65,7 @@ public class ComputerController : MonoBehaviour
         else // turned on
         {
             Debug.Log("Looks like there is something on the computer");
+            audioSource.PlayOneShot(computerClickClip);
             onAccesing.Invoke();
         }
     }
