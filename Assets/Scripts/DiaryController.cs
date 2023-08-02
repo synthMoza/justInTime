@@ -12,6 +12,13 @@ public class DiaryController : MonoBehaviour
     private GameObject prefabObj;
     [SerializeField]
     private Transform parentObj;
+
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip openDiaryClip;
+    [SerializeField]
+    private AudioClip closeDiaryClip;
     
     private bool isOpened;
     public UnityEvent onOpen;
@@ -69,9 +76,15 @@ public class DiaryController : MonoBehaviour
         isOpened = !isOpened;
 
         if (isOpened)
+        {
+            audioSource.PlayOneShot(openDiaryClip);
             onOpen.Invoke();
+        }
         else
+        {
+            audioSource.PlayOneShot(closeDiaryClip);
             onClose.Invoke();
+        }
     }
 
     void Update()
