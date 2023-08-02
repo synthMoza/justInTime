@@ -45,8 +45,10 @@ public class TimeManager : MonoBehaviour
             if (currentTime <= 0)
             {
                 // Time has passed, trigger the event and disable the clock
-                StopTickingClip();
                 isClockTicking = false;
+                currentTime = 0;
+
+                StopTickingClip();
                 onTimePassed.Invoke();
             }
         }

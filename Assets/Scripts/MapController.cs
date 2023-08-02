@@ -17,12 +17,18 @@ public class MapController : MonoBehaviour
     private GameObject upperRightShadow;
 
     [SerializeField]
+    private Sprite leftWindowLightSprite2;
+    
+    [SerializeField]
     private GameObject leftWindowLight;
     [SerializeField]
     private GameObject rightWindowLight;
 
     [SerializeField]
     private ComputerController computer;
+
+    [SerializeField]
+    private GameObject neonArrow;
 
     public void TurnElectricityState()
     {
@@ -44,6 +50,9 @@ public class MapController : MonoBehaviour
             // handle electric stuff
             computer.TrySetState(false);
         }
+
+        // hint on second button
+        neonArrow.SetActive(!isLeftCurtainOpen && !isElectricityOn);
     }
 
     public bool IsElectricityOn()
@@ -56,6 +65,14 @@ public class MapController : MonoBehaviour
         isLeftCurtainOpen = !isLeftCurtainOpen;
         leftWindowLight.SetActive(isLeftCurtainOpen);
         upperLeftShadow.SetActive(!isLeftCurtainOpen && !isElectricityOn);
+        
+        // hint on second button
+        neonArrow.SetActive(!isLeftCurtainOpen && !isElectricityOn);
+    }
+
+    public void ChangeLeftWindowLightSprite()
+    {
+        leftWindowLight.GetComponent<SpriteRenderer>().sprite = leftWindowLightSprite2;
     }
 
     public void ChangeRightWindowState()

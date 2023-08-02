@@ -12,6 +12,8 @@ public class ExitDoor : MonoBehaviour
     private AudioSource audioSource;
     [SerializeField]
     private AudioClip openDoorClip;
+    [SerializeField]
+    private AudioClip lockedDoorClip;
 
     public UnityEvent onWrongAccessing;
     public UnityEvent onEnterEvent;
@@ -39,7 +41,10 @@ public class ExitDoor : MonoBehaviour
         if (canbeOpened)
             Open();
         else
+        {
             onWrongAccessing.Invoke();
+            audioSource.PlayOneShot(lockedDoorClip);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
