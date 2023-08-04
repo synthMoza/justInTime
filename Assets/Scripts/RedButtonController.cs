@@ -14,7 +14,7 @@ public class RedButtonController : ButtonController
         timing = PlayerPrefs.GetInt("red_button_timing", 0);
         if (timing == 0)
         {
-            timing = Random.Range(80, 100);
+            timing = Random.Range(30, 55);
             PlayerPrefs.SetInt("red_button_timing", (int) timing);
         }
 

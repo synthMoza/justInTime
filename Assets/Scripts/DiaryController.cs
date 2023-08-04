@@ -67,13 +67,11 @@ public class DiaryController : MonoBehaviour
         for (int i = 0; i < count; ++i)
             AddNote(PlayerPrefs.GetString("hint_" + i));
         
-        Debug.Log("check");
         attempt = PlayerPrefs.GetInt("attempt", 0);
-        if (attempt == 0)
-            PlayerPrefs.SetInt("attempt", attempt);
-
+        Debug.Log("check attempt: " + attempt);
+        
         attempt += 1;
-        attemptText.text = "Attempt: " + attempt;
+        attemptText.text = "Attempt: " + attempt.ToString();
     }
 
     void OnDisable()

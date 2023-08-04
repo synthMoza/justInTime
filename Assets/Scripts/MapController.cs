@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 
 public class MapController : MonoBehaviour
@@ -94,5 +95,15 @@ public class MapController : MonoBehaviour
     public bool IsLightsOff()
     {
         return !isRightCurtainOpen && !isLeftCurtainOpen && !isElectricityOn;
+    }
+
+    public void ChangeSceneToMenu()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 2);
+    }
+
+    public void RestartCurrentScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
