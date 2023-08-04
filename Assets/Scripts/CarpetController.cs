@@ -7,9 +7,26 @@ public class CarpetController : MonoBehaviour
     [SerializeField]
     private Sprite openCarpetSprite;
 
+    [SerializeField]
+    private GameObject noteObject;
+
+    [SerializeField]
+    private AudioSource audioSource;
+    [SerializeField]
+    private AudioClip carpetSound;
+
+    private bool isOpen;
+
     public void OpenCarpet(MapController mapController)
     {
-        gameObject.GetComponent<SpriteRenderer>().sprite = openCarpetSprite;
-        mapController.ChangeLeftWindowLightSprite();
+        if (!isOpen)
+        {
+            gameObject.GetComponent<SpriteRenderer>().sprite = openCarpetSprite;
+            mapController.ChangeLeftWindowLightSprite();
+            audioSource.PlayOneShot(carpetSound);
+            noteObject.SetActive(true);
+            
+            isOpen = true;            
+        }
     }
 }

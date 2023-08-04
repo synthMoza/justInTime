@@ -5,9 +5,16 @@ using UnityEngine;
 
 public class CodeLock : MonoBehaviour
 {
+    private string secretCode;
     private string currentCode;
-    public string secretCode; // TODO: generate randomly?
-    public UnityEvent onRightInput;
+    
+    [SerializeField]
+    private HintsManager hintsManager;
+    [SerializeField]
+    private DiaryController diaryController;
+
+    [SerializeField]
+    private Sprite openSafeSprite;
 
     [SerializeField]
     private AudioSource audioSource;
@@ -17,6 +24,19 @@ public class CodeLock : MonoBehaviour
     private AudioClip wrongInputClip;
     [SerializeField]
     private AudioClip safeOpenClip;
+
+    void Start()
+    {
+        // Check if we have generated secret code before
+        secretCode = PlayerPrefs.GetString("safe_secret_code", ""); // not a good idea to store secret code lkiek that but screw it
+        if (secretCode == "")
+        {
+            // generate a new code
+            secretCode = Random.Range(1000, 9999).ToString();
+            PlayerPrefs.SetString("safe_secret_code", secretCode);
+        }
+        Debug.Log("secret_code is " + secretCode);
+    }
 
     public void ClearCode()
     {
@@ -34,8 +54,13 @@ public class CodeLock : MonoBehaviour
         if (currentCode == secretCode)
         {
             audioSource.PlayOneShot(correctInputClip);
-            onRightInput.Invoke();
             audioSource.PlayOneShot(safeOpenClip);
+            gameObject.GetComponent<SpriteRenderer>().sprite = openSafeSprite;
+            
+            int timing = PlayerPrefs.GetInt("red_button_timing");
+            string timingStr = (timing / 60).ToString() + ":" + (timing % 60).ToString();
+            hintsManager.ShowHint("There is a note in the safe, and it says: \"Red Button " + timingStr + "\". Is it connected with the timer?");
+            diaryController.AddNote("\"Red Button " + timingStr + "\" - note in the safe says");
             Debug.Log("The safe has been opened");
         }
         else

@@ -19,6 +19,10 @@ public class DiaryController : MonoBehaviour
     private AudioClip openDiaryClip;
     [SerializeField]
     private AudioClip closeDiaryClip;
+
+    [SerializeField]
+    private Text attemptText;
+    private int attempt;
     
     private bool isOpened;
     public UnityEvent onOpen;
@@ -27,6 +31,7 @@ public class DiaryController : MonoBehaviour
     private int noteCount = 0;
     private float offset = 4f;
     private char noteSuffix = '·';
+
 
     public void AddNote(string note)
     {
@@ -61,6 +66,14 @@ public class DiaryController : MonoBehaviour
         int count = PlayerPrefs.GetInt("hints_size", 0);
         for (int i = 0; i < count; ++i)
             AddNote(PlayerPrefs.GetString("hint_" + i));
+        
+        Debug.Log("check");
+        attempt = PlayerPrefs.GetInt("attempt", 0);
+        if (attempt == 0)
+            PlayerPrefs.SetInt("attempt", attempt);
+
+        attempt += 1;
+        attemptText.text = "Attempt: " + attempt;
     }
 
     void OnDisable()
@@ -68,6 +81,8 @@ public class DiaryController : MonoBehaviour
         PlayerPrefs.SetInt("hints_size", hints.Count);
         for (int i = 0; i < hints.Count; ++i)
             PlayerPrefs.SetString("hint_" + i, hints[i]);
+        
+        PlayerPrefs.SetInt("attempt", attempt);
         PlayerPrefs.Save();
     }
 

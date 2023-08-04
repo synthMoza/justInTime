@@ -10,6 +10,9 @@ public class MapController : MonoBehaviour
     private bool isRightCurtainOpen = true;
 
     [SerializeField]
+    private AudioSource buzzingSoundSource;
+
+    [SerializeField]
     private GameObject lowerShadow;
     [SerializeField]
     private GameObject upperLeftShadow;
@@ -39,6 +42,9 @@ public class MapController : MonoBehaviour
             lowerShadow.SetActive(false);
             upperLeftShadow.SetActive(false);
             upperRightShadow.SetActive(false);
+            
+            // buzzing sound
+            buzzingSoundSource.Play();
         }
         else
         {
@@ -46,6 +52,9 @@ public class MapController : MonoBehaviour
             lowerShadow.SetActive(true);
             upperLeftShadow.SetActive(!isLeftCurtainOpen);
             upperRightShadow.SetActive(!isRightCurtainOpen);
+
+            // buzzing sound
+            buzzingSoundSource.Stop();
 
             // handle electric stuff
             computer.TrySetState(false);

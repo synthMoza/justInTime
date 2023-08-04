@@ -6,6 +6,11 @@ using UnityEngine;
 public class ComputerController : MonoBehaviour
 {
     [SerializeField]
+    private HintsManager hintsManager;
+    [SerializeField]
+    private DiaryController diaryController;
+
+    [SerializeField]
     private MapController mapController;
     [SerializeField]
     private Sprite computerOff;
@@ -19,8 +24,6 @@ public class ComputerController : MonoBehaviour
     [SerializeField]
     private AudioClip computerClickClip;
 
-    public UnityEvent onAccesing;
-    public UnityEvent onWrongAccesing;
     private bool isTurnedOn = false;
 
     private void ChangeSprite()
@@ -59,14 +62,17 @@ public class ComputerController : MonoBehaviour
             else
             {
                 Debug.Log("I can't use it right now");
-                onWrongAccesing.Invoke();
+                hintsManager.ShowHint("I can't turn it on, this computer is not conected to the network.");
             }
         }
         else // turned on
         {
             Debug.Log("Looks like there is something on the computer");
             audioSource.PlayOneShot(computerClickClip);
-            onAccesing.Invoke();
+
+            string fileName = PlayerPrefs.GetString("safe_secret_code") + ".txt";
+            hintsManager.ShowHint("Hm, there is an interesting file " + fileName + " on the desktop, what is it about?");
+            diaryController.AddNote("One can find file " + fileName + " on the desktop");
         }
     }
 }
