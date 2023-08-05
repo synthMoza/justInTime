@@ -7,6 +7,13 @@ public class CodeLock : MonoBehaviour
 {
     private string secretCode;
     private string currentCode;
+
+    [SerializeField]
+    private GameObject interactableObj;
+    [SerializeField]
+    private GameObject codeLockScreen;
+    [SerializeField]
+    private PauseManager pauseManager;
     
     [SerializeField]
     private HintsManager hintsManager;
@@ -62,6 +69,10 @@ public class CodeLock : MonoBehaviour
             hintsManager.ShowHint("There is a note in the safe, and it says: \"Red Button " + timingStr + "\". Is it connected with the timer?");
             diaryController.AddNote("\"Red Button " + timingStr + "\" - note in the safe says");
             Debug.Log("The safe has been opened");
+            
+            interactableObj.SetActive(false);
+            codeLockScreen.SetActive(false);
+            pauseManager.ChangePhysicsPause();
         }
         else
         {

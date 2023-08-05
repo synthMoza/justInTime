@@ -11,7 +11,7 @@ public class Interactable : MonoBehaviour
 
     void Update()
     {
-        if (isInRange && Input.GetKeyDown(interactKey))
+        if (isInRange && Input.GetKeyDown(interactKey) && !PauseManager.isGamePaused)
             interactAction.Invoke();
     }
 

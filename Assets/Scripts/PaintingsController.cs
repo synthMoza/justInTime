@@ -9,6 +9,14 @@ public class PaintingsController : MonoBehaviour
     [SerializeField]
     private DiaryController diaryController;
 
+    [SerializeField]
+    private Painting leftPainting;
+    [SerializeField]
+    private Painting rightPainting;
+
+    [SerializeField]
+    private DressersController dressersController;
+
     private bool waPlayerNotified = false;
 
     public void TryInteract(Painting painting)
@@ -24,5 +32,10 @@ public class PaintingsController : MonoBehaviour
         {
             painting.Rotate();
         }
+
+        if (leftPainting.IsRightPosition() && rightPainting.IsRightPosition())
+            dressersController.UnlockDressers();
+        else
+            dressersController.LockDressers();
     }
 }

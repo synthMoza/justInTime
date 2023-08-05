@@ -34,10 +34,10 @@ public class PlayerController : MonoBehaviour
         position.x = Input.GetAxisRaw("Horizontal");
         position.y = Input.GetAxisRaw("Vertical");
 
-        HandleWalkingSounds();
-
         if (!PauseManager.isPhysicsPaused)
         {
+            HandleWalkingSounds();
+            
             animator.SetFloat("Horizontal", position.x);
             animator.SetFloat("Vertical", position.y);
             animator.SetFloat("Speed", position.sqrMagnitude);

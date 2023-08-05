@@ -104,7 +104,8 @@ public class DiaryController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.J))
         {
-            ChangeState();
+            if (isOpened || !PauseManager.isPhysicsPaused)
+                ChangeState();
         }
     }
 }

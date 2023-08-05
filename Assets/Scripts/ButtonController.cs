@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class ButtonController : MonoBehaviour
 {
+    private bool wasPressed = false;
+
     public UnityEvent onTrueCondition;
     public UnityEvent onWrongCondition;
 
@@ -23,6 +25,10 @@ public class ButtonController : MonoBehaviour
 
     public void TryPress()
     {
+        if (wasPressed)
+            return;
+        
+        wasPressed = true;
         audioSource.PlayOneShot(buttonClickClip);
         gameObject.GetComponent<SpriteRenderer>().sprite = pressedButtonSprite;
         
